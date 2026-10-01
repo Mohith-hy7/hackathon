@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1f5b36" />
+    <title>BeeGuard | Smart Bee Protection</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <a class="brand" href="#home" aria-label="BeeGuard home">🐝 BeeGuard</a>
+      <nav aria-label="Primary navigation">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#alerts">Alerts</a>
+        <a href="#matching">Hive Match</a>
+        <a href="#honey">Honey</a>
+        <a href="#hives">Hives</a>
+        <a href="#assistant">Assistant</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">SMART BEE HEALTH &amp; POLLINATION</p>
+          <h1>Protect bees.<br />Grow better harvests.</h1>
+          <p class="hero-copy">
+            BeeGuard connects farmers, beekeepers and buyers with practical
+            pesticide alerts, hive matching and verified honey traceability.
+          </p>
+          <a class="button button-primary" href="#dashboard">Explore live data</a>
+          <p id="serverStatus" class="server-status" role="status">Connecting to BeeGuard…</p>
+        </div>
+      </section>
+
+      <section id="dashboard" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">LIVE OVERVIEW</p>
+          <h2>📊 BeeGuard Dashboard</h2>
+          <p>These metrics are loaded from the BeeGuard database.</p>
+        </div>
+        <div class="dashboard-grid">
+          <article class="metric-card">
+            <span class="metric-icon" aria-hidden="true">🐝</span>
+            <p>Bee health</p>
+            <strong id="beeHealth">—</strong>
+            <span class="metric-caption good">Average active-hive score</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-icon" aria-hidden="true">🌻</span>
+            <p>Pollination</p>
+            <strong id="pollination">—</strong>
+            <span class="metric-caption good">Average hive coverage</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-icon" aria-hidden="true">⚠️</span>
+            <p>Pesticide risk</p>
+            <strong id="riskValue">—</strong>
+            <span id="riskCaption" class="metric-caption warning">Checking active alerts</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-icon" aria-hidden="true">🍯</span>
+            <p>Verified batches</p>
+            <strong id="honeyBatches">—</strong>
+            <span class="metric-caption good">Traceable products</span>
+          </article>
+        </div>
+      </section>
+
+      <section id="alerts" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">EARLY WARNING</p>
+          <h2>☠️ Pesticide Risk Alert</h2>
+          <p>Active alerts are stored and updated by the backend.</p>
+        </div>
+        <article id="alertCard" class="alert-card" aria-live="polite">
+          <div class="alert-content">
+            <span id="alertBadge" class="risk-badge">Loading</span>
+            <h3 id="alertTitle">Checking for pesticide alerts…</h3>
+            <p id="alertMessage">Please wait while BeeGuard contacts the server.</p>
+            <dl class="alert-details">
+              <div>
+                <dt>Farm</dt>
+                <dd id="alertFarm">—</dd>
+              </div>
+              <div>
+                <dt>Distance</dt>
+                <dd id="alertDistance">—</dd>
+              </div>
+              <div>
+                <dt>Spray date</dt>
+                <dd id="alertDate">—</dd>
+              </div>
+            </dl>
+          </div>
+          <button id="protectHiveButton" class="button button-warning" type="button" disabled>
+            Protect hives
+          </button>
+        </article>
+        <p id="protectionMessage" class="feedback" role="status"></p>
+      </section>
+
+      <section id="matching" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">DECISION SUPPORT</p>
+          <h2>🐝 Smart Hive–Crop Matching</h2>
+          <p>Evaluate a proposed hive location. Each result is calculated and saved by the API.</p>
+        </div>
+        <form id="matchForm" class="form-card">
+          <label>
+            Crop
+            <select id="crop" name="crop">
+              <option value="Sunflower">Sunflower</option>
+              <option value="Apple">Apple</option>
+              <option value="Mustard">Mustard</option>
+              <option value="Cotton">Cotton</option>
+            </select>
+          </label>
+          <label>
+            Distance from crop (km)
+            <input id="distance" name="distance" type="number" min="0" max="1000" step="0.1" value="1.8" required />
+          </label>
+          <label>
+            Flower availability (%)
+            <input id="flowers" name="flowers" type="number" min="0" max="100" step="1" value="85" required />
+          </label>
+          <button class="button button-primary" type="submit">Find hive match</button>
+        </form>
+        <div id="matchResult" class="result-card result-placeholder" aria-live="polite">
+          Enter a location to receive a live match score.
+        </div>
+      </section>
+
+      <section class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">HABITAT MONITOR</p>
+          <h2>🌳 A healthier place for pollinators</h2>
+        </div>
+        <div class="habitat-grid">
+          <article class="habitat-card">
+            <span>🌸</span>
+            <h3>Flower coverage</h3>
+            <div class="progress" aria-label="Flower coverage 82 percent"><span style="width: 82%"></span></div>
+            <p>Wildflower corridors are active around monitored farms.</p>
+          </article>
+          <article class="habitat-card">
+            <span>💧</span>
+            <h3>Water access</h3>
+            <div class="progress" aria-label="Water availability 90 percent"><span style="width: 90%"></span></div>
+            <p>Clean water sources are available near registered hives.</p>
+          </article>
+          <article class="habitat-card">
+            <span>🌿</span>
+            <h3>Habitat score</h3>
+            <strong>88<small>/100</small></strong>
+            <p>A strong habitat supports healthy, resilient colonies.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="honey" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">TRUSTED TRACEABILITY</p>
+          <h2>🍯 Honey verification</h2>
+          <p>Look up a batch’s origin, producer and quality status in the database.</p>
+        </div>
+        <form id="verifyForm" class="form-card form-card-compact">
+          <label>
+            Honey batch ID
+            <input id="batchId" name="batchId" type="text" maxlength="60" placeholder="e.g. BG2026-001" required />
+          </label>
+          <button class="button button-primary" type="submit">Verify honey</button>
+        </form>
+        <div id="honeyResult" class="result-card result-placeholder" aria-live="polite">
+          Try a demo ID: <strong>BG2026-001</strong> or <strong>BG2026-002</strong>.
+        </div>
+      </section>
+
+      <section id="buyer" class="section buyer-section">
+        <div class="section-heading">
+          <p class="eyebrow">BUYER MARKETPLACE</p>
+          <h2>🍯 Find affordable honey</h2>
+          <p>Compare verified honey prices from different sellers.</p>
+        </div>
+        <form id="buyerForm" class="form-card">
+          <label>
+            Honey type
+            <select id="honeyType" name="honeyType">
+              <option value="Wildflower">Wildflower</option>
+              <option value="Mustard">Mustard</option>
+              <option value="Sunflower">Sunflower</option>
+            </select>
+          </label>
+          <label>
+            Maximum price per kg (₹)
+            <input id="maxPrice" name="maxPrice" type="number" min="0" max="1000000" step="1" placeholder="e.g. 450" />
+          </label>
+          <button class="button button-primary" type="submit">Search honey</button>
+        </form>
+        <div id="buyerResults" class="buyer-results" aria-live="polite"></div>
+      </section>
+
+      <section id="availability" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">LIVE INVENTORY</p>
+          <h2>🍯 Honey Availability</h2>
+          <p>Search the local BeeGuard database for available honey batches.</p>
+        </div>
+
+        <form id="availabilityForm" class="form-card form-card-compact">
+          <label>
+            Honey type
+            <input id="availabilityType" name="availabilityType" type="text"
+                   maxlength="50" placeholder="e.g. Wildflower" value="Wildflower" required />
+          </label>
+          <button class="button button-primary" type="submit">Check availability</button>
+        </form>
+
+        <div id="availabilityResults" class="availability-panel" aria-live="polite">
+          Search for a honey type to see available batches.
+        </div>
+      </section>
+
+      <section id="hives" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">APIARY MONITOR</p>
+          <h2>🐝 Hive Occupancy</h2>
+          <p>Occupancy and hive details are loaded directly from the local SQLite database.</p>
+        </div>
+
+        <div class="occupancy-grid">
+          <article class="metric-card">
+            <span class="metric-icon">🏠</span>
+            <p>Total hives</p>
+            <strong id="totalHives">—</strong>
+          </article>
+          <article class="metric-card">
+            <span class="metric-icon">🐝</span>
+            <p>Occupied</p>
+            <strong id="occupiedHives">—</strong>
+          </article>
+          <article class="metric-card">
+            <span class="metric-icon">🟢</span>
+            <p>Available</p>
+            <strong id="availableHives">—</strong>
+          </article>
+          <article class="metric-card">
+            <span class="metric-icon">🔧</span>
+            <p>Maintenance</p>
+            <strong id="maintenanceHives">—</strong>
+          </article>
+        </div>
+
+        <div class="occupancy-card">
+          <div class="occupancy-heading">
+            <strong id="occupancyText">Occupancy: —</strong>
+            <span>Current hive utilization</span>
+          </div>
+          <div class="occupancy-bar">
+            <span id="occupancyProgress"></span>
+          </div>
+        </div>
+
+        <div id="hiveList" class="hive-list" aria-live="polite"></div>
+      </section>
+
+      <section id="assistant" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">OFFLINE ASSISTANT</p>
+          <h2>🤖 BeeGuard Assistant</h2>
+          <p>Answers predefined BeeGuard questions locally. No Internet or AI API key is required.</p>
+        </div>
+
+        <article class="chat-card">
+          <div id="chatBox" class="chat-box" aria-live="polite">
+            <div class="bot-message">
+              <strong>🐝 BeeGuard Assistant</strong>
+              <p>
+                Hello! I can answer predefined questions about honey,
+                hives, pesticides, honey verification and BeeGuard.
+              </p>
+            </div>
+          </div>
+
+          <div class="quick-questions">
+            <button type="button" data-question="How do I verify honey?">Verify honey</button>
+            <button type="button" data-question="What is hive occupancy?">Hive occupancy</button>
+            <button type="button" data-question="How can I protect bees from pesticides?">Protect bees</button>
+            <button type="button" data-question="How do I find honey?">Find honey</button>
+          </div>
+
+          <form id="chatForm" class="chat-form">
+            <input id="chatQuestion" type="text" maxlength="300"
+                   placeholder="Ask a BeeGuard question..." autocomplete="off" required />
+            <button class="button button-primary" type="submit">Send</button>
+          </form>
+
+          <p class="offline-status">🟢 Offline • Local SQLite FAQ assistant</p>
+        </article>
+      </section>
+
+    </main>
+
+    <footer>
+      <strong>🐝 BeeGuard</strong>
+      <span>Built for practical bee protection and transparent honey.</span>
+    </footer>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
